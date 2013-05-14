@@ -1,16 +1,43 @@
 {
   "name": "mood",
-  "subdomain": "mood",
-  "version": "0.0.0",
-  "scripts": {"start": "node server.js"},
-  "engines": {
-    "node": ">=0.8.x"
+  "description": "Twitter feelings analizer",
+  "version": "0.1.0",
+  "homepage": "https://github.com/diesire/mood",
+  "author": {
+    "name": "Pablo Escalada Gómez",
+    "email": "diesire@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/diesire/mood.git"
+  },
+  "bugs": {
+    "url": "https://github.com/diesire/mood/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/diesire/mood/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/mood",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt": "~0.4.1"
+  },
+  "keywords": [],
   "dependencies": {
-    "restify": ">=1.4.x",
-    "mongoose": ">=2.6.x",
-    "connect": ">=2.7.4",
-	"natural": "*",
-	"languagedetect": "*"
+    "natural": "~0.1.21",
+    "languagedetect": "~1.1.0",
+    "mongoose": "~3.6.10",
+    "restify": "~2.5.0"
   }
 }
