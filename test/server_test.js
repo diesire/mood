@@ -10,7 +10,8 @@
 
 var restify = require('restify');
 
-var tweet = "No dejes que la realidad te estropee una buena historia, pero si haces un documental cuéntame toda la verdad http://tinyurl.com/czqxfow ";
+var tweet =
+    "No dejes que la realidad te estropee una buena historia, pero si haces un documental cuéntame toda la verdad http://tinyurl.com/czqxfow ";
 
 // Creates a JSON client
 var client = restify.createJsonClient({
@@ -39,20 +40,20 @@ var client = restify.createJsonClient({
 */
 
 exports['test'] = {
-    setUp: function (done) {
+    setUp: function(done) {
         done();
     },
 
-    'JSON client': function (test) {
+    'JSON client': function(test) {
         test.expect(1);
         test.ok(client !== null, 'should not be null');
         test.done();
     },
 
 
-    'Endpoint': function (test) {
+    'Endpoint': function(test) {
         test.expect(4);
-        client.get('/', function (err, req, res, data) {
+        client.get('/', function(err, req, res, data) {
             test.ok(err === null, 'should not have errors');
             test.ok(req.method === 'GET', 'should be GET');
             test.ok(res.statusCode === 201, 'should be status 201');
@@ -65,12 +66,12 @@ exports['test'] = {
     },
 
 
-    'Rate tweet': function (test) {
+    'Rate tweet': function(test) {
         test.expect(4);
 
         client.post('/rate', {
             tweet: tweet
-        }, function (err, req, res, data) {
+        }, function(err, req, res, data) {
             test.ok(err === null, 'should not have errors');
             test.ok(req.method === 'POST', 'should be POST');
             test.ok(res.statusCode === 201, 'should be status 201');
@@ -79,30 +80,32 @@ exports['test'] = {
         });
     },
 
-    'Tokenize tweet': function (test) {
+    'Tokenize tweet': function(test) {
         test.expect(4);
 
         client.post('/tools/tokenizer', {
             tweet: 'hola mundo'
-        }, function (err, req, res, data) {
+        }, function(err, req, res, data) {
             test.ok(err === null, 'should not have errors');
             test.ok(req.method === 'POST', 'should be POST');
             test.ok(res.statusCode === 201, 'should be status 201');
-            test.deepEqual(data.tokens, ['hola', 'mundo'], 'shoud have tokens []');
+            test.deepEqual(data.tokens, ['hola', 'mundo'],
+                'shoud have tokens []');
             test.done();
         });
     },
-    
-    'Stemmize tweet': function (test) {
+
+    'Stemmize tweet': function(test) {
         test.expect(4);
 
         client.post('/tools/stemmer', {
             tweet: 'adios mundo cruel'
-        }, function (err, req, res, data) {
+        }, function(err, req, res, data) {
             test.ok(err === null, 'should not have errors');
             test.ok(req.method === 'POST', 'should be POST');
             test.ok(res.statusCode === 201, 'should be status 201');
-            test.deepEqual(data.tokens, ['adio', 'mundo', 'cruel'], 'shoud have tokens []');
+            test.deepEqual(data.tokens, ['adio', 'mundo', 'cruel'],
+                'shoud have tokens []');
             test.done();
         });
     }
