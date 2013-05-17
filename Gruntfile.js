@@ -1,11 +1,12 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
         nodeunit: {
-            files: ['test/**/*_test.js'],
+            lib: ['test/mood_test.js'],
+            server: ['test/server_test.js'],
         },
         jshint: {
             options: {
@@ -18,11 +19,42 @@ module.exports = function (grunt) {
                 src: ['lib/**/*.js']
             },
             server: {
-                src: ['server/server.js']
+                src: ['server/**/*.js']
             },
             test: {
                 src: ['test/**/*.js']
             },
+        },
+        jsbeautifier: {
+            gruntfile: {
+                src: '<%= jshint.gruntfile.src %>'
+            },
+            lib: {
+                src: '<%= jshint.lib.src %>',
+            },
+            test: {
+                src: '<%= jshint.test.src %>',
+            },
+            server: {
+                src: '<%= jshint.server.src %>',
+            },
+            options: {
+                indent_size: 4,
+                indent_char: " ",
+                indent_level: 0,
+                indent_with_tabs: false,
+                preserve_newlines: true,
+                max_preserve_newlines: 10,
+                jslint_happy: false,
+                brace_style: "collapse",
+                keep_array_indentation: false,
+                keep_function_indentation: false,
+                space_before_conditional: true,
+                eval_code: false,
+                indent_case: false,
+                wrap_line_length: 80,
+                unescape_strings: false
+            }
         },
         express: {
             options: {
@@ -31,13 +63,13 @@ module.exports = function (grunt) {
                 background: true,
 
                 // Called if spawning the server fails
-                error: function (err, result, code) {
-                    grunt.writeln(err.stderr);
+                error: function(err, result, code) {
+                    grunt.log.writeln(err.stderr);
                 },
 
                 // Called when the spawned server throws errors
-                fallback: function () {
-                    grunt.writeln('Error fallback');
+                fallback: function() {
+                    grunt.log.writeln('Error fallback');
                 },
 
                 // Override node env's PORT
@@ -52,16 +84,31 @@ module.exports = function (grunt) {
         watch: {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
-                tasks: ['jshint:gruntfile']
+                tasks: ['jsbeautifier:gruntfile', 'jshint:gruntfile']
             },
-            express: {
-                files: ['<%= jshint.lib.src %>', '<%= jshint.test.src %>', 'server/server.js'],
-                tasks: ['jshint', 'express:dev', 'nodeunit'],
-                options: {
-                    nospawn: false //Without this option specified express won't be reloaded
-                }
+            lib: {
+                files: '<%= jshint.lib.src %>',
+                tasks: ['jsbeautifier:lib', 'jshint:lib']
+            },
+            test: {
+                files: '<%= jshint.test.src %>',
+                tasks: ['jsbeautifier:test', 'jshint:test']
+            },
+            server: {
+                files: '<%= jshint.server.src %>',
+                tasks: ['jsbeautifier:server', 'jshint:server']
             }
-        },
+            //            ,
+            //            express: {
+            //                files: ['<%= jshint.lib.src %>', '<%= jshint.test.src %>',
+            //                        '<%= jshint.server.src %>'
+            //                ],
+            //                tasks: ['jshint', 'express:dev', 'nodeunit'],
+            //                options: {
+            //                    nospawn: false //Without this option specified express won't be reloaded
+            //                }
+            //            }
+        }
     });
 
     // These plugins provide necessary tasks.
@@ -69,11 +116,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-jsbeautifier');
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'nodeunit']);
+    grunt.registerTask('default', ['jsbeautifier', 'jshint', 'watch']);
     grunt.registerTask('test', ['express:dev', 'nodeunit']);
-    grunt.registerTask('server', ['express:dev', 'watch']);
-    grunt.registerTask('stop', ['express:dev:stop']);
-
 };
