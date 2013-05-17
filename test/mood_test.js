@@ -62,11 +62,20 @@ exports['test'] = {
     },
 
     'Rate simple text': function(test) {
-        var hi = 'hi';
+        var hi = 'En un lugar de la Mancha de cuyo nombre no quiero acordarme';
 
-        test.expect(1);
-        test.equal(mood.rate(hi), hi.length, 'should be text.lenght');
-        test.done();
+        mood.rate(hi, {
+            callback: mood.ratingStrategy.simple,
+            args: {
+                min: 3,
+                max: 6
+            }
+        }, function(err, data) {
+            test.expect(1);
+            test.ok(data.raw.length > 0, 'should match some seeds');
+            //console.log(data.rating);
+            test.done();
+        });
     },
 
     'Tokenize simple text': function(test) {
@@ -79,10 +88,12 @@ exports['test'] = {
     },
 
     'Stemmize simple text': function(test) {
-        var helloWorld = 'Adiós mundo cruel!';
+        var helloWorld = 'Adiós mundo cruel';
 
         test.expect(1);
-        test.deepEqual(mood.tools.stemmer(helloWorld), ['adi', 'mundo', 'cruel'],
+        test.deepEqual(mood.tools.stemmer(helloWorld, 'es'), ['adi', 'mundo',
+                'cruel'
+        ],
             'should be [adi, mundo, cruel]');
         test.done();
     },
@@ -105,14 +116,113 @@ exports['test'] = {
     //        });
     //    },
 
+    //    'Batch stemmer ': function(test) {
+    //        mood.batchStemmer(function(err, data) {
+    //            test.expect(1);
+    //            test.equal(data.length, 9180, 'should be 9180');
+    //            test.done();
+    //        });
+    //    },
+
     'Get all seeds ': function(test) {
-        mood.get(function(err, data) {
-            console.log(data);
+        mood.get({}, function(err, data) {
             test.expect(1);
-            test.ok(true);
+            test.equal(data.length, 9180, 'should have 9180 seeds');
             test.done();
         });
+    },
+
+    'Multiple tweets rating': function(test) {
+        var tweets = require(
+            './tweets').set1;
+        var strategy = {
+            callback: mood.ratingStrategy.simple,
+            args: {
+                min: 3,
+                max: 6
+            }
+        };
+
+        test.expect(tweets.length);
+
+        tweets.forEach(function(entry, index) {
+            mood.rate(entry.tweet, strategy, function(err, data) {
+                test.ok(data.raw.length > 0, 'should match some seeds ');
+                if (index === tweets.length - 1) {
+                    test.done();
+                }
+            });
+        });
+    },
+
+    'Negative tweets rating': function(test) {
+        var tweets = require(
+            './tweets').negativeSet;
+        var strategy = {
+            callback: mood.ratingStrategy.simple,
+            args: {
+                min: 3,
+                max: 6
+            }
+        };
+
+        test.expect(tweets.length);
+
+        tweets.forEach(function(entry, index) {
+            mood.rate(entry.tweet, strategy, function(err, data) {
+                test.ok(data.rating < 3, 'should be rated < 3 ');
+                if (index === tweets.length - 1) {
+                    test.done();
+                }
+            });
+        });
+    },
+
+    'Neutral tweets rating': function(test) {
+        var tweets = require(
+            './tweets').neutralSet;
+        var strategy = {
+            callback: mood.ratingStrategy.simple,
+            args: {
+                min: 3,
+                max: 6
+            }
+        };
+
+        test.expect(tweets.length);
+
+        tweets.forEach(function(entry, index) {
+            mood.rate(entry.tweet, strategy, function(err, data) {
+                test.ok(data.rating > 3 && data.rating < 6,
+                    'should be rated > 3 and < 6');
+                if (index === tweets.length - 1) {
+                    test.done();
+                }
+            });
+        });
+    },
+
+    'Positive tweets rating': function(test) {
+        var tweets = require(
+            './tweets').positiveSet;
+        var strategy = {
+            callback: mood.ratingStrategy.simple,
+            args: {
+                min: 3,
+                max: 6
+            }
+        };
+
+        test.expect(tweets.length);
+
+        tweets.forEach(function(entry, index) {
+            mood.rate(entry.tweet, strategy, function(err, data) {
+                test.ok(data.rating > 6,
+                    'should be rated > 6');
+                if (index === tweets.length - 1) {
+                    test.done();
+                }
+            });
+        });
     }
-
-
 };
