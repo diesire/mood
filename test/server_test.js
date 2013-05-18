@@ -10,9 +10,6 @@
 
 var restify = require('restify');
 
-var tweet =
-    "No dejes que la realidad te estropee una buena historia, pero si haces un documental cuéntame toda la verdad http://tinyurl.com/czqxfow ";
-
 // Creates a JSON client
 var client = restify.createJsonClient({
     url: 'http://localhost:8082/'
@@ -69,13 +66,14 @@ exports['test'] = {
     'Rate tweet': function(test) {
         test.expect(4);
 
-        client.post('/rate', {
-            tweet: tweet
-        }, function(err, req, res, data) {
+        var tweets = require(
+            './tweets').positiveSet;
+
+        client.post('/rate', tweets[0], function(err, req, res, data) {
             test.ok(err === null, 'should not have errors');
             test.ok(req.method === 'POST', 'should be POST');
             test.ok(res.statusCode === 201, 'should be status 201');
-            test.equal(data.rating, 6, 'shoud have rating property');
+            test.ok(data.rating > 0, 'shoud have rating property');
             test.done();
         });
     },

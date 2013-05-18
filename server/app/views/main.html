@@ -1,0 +1,48 @@
+<!-- Envoltorio con todo el contenido de la pÃ¡gina -->
+<section id="wrap">
+    <!-- Envoltorio con el contenido de la pagina -->
+    <section class="container">
+        <!-- Cabecera de la pagina -->
+        <header class="page-header">
+            <h1>Máster en Ingeniería Web
+                <br>
+                <small>Universidad de Oviedo -Analizador de sentimiento</small>
+            </h1>
+        </header>
+        <!-- PestaÃ±as laterales la pagina -->
+        <section class="tabbable tabs-left">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a href="index.html">Presentación</a>
+                </li>
+                <li class="active">
+                    <a href="#">Analizador</a>
+                </li>
+            </ul>
+            <!-- Contenido de las pestaÃ±as -->
+            <section class="tab-content">
+                <div chart></div>
+                <pre>{{dataArray}}</pre>
+                <form novalidate class="simple-form">Palabra:
+                    <input type="text" ng-model="topic" placeholder="universo" />
+                    <br />Fecha:
+                    <input type="text" ng-model="date" placeholder="2008-02-02"/>
+                    <br />Mímimo:
+                    <input type="number" ng-model="min" placeholder="3"/>
+                    <br />Máximo:
+                    <input type="number" ng-model="max" placeholder="6"/>
+                    <br />
+                    <button ng-click="fetch()">Buscar</button>
+                </form>
+                <pre>{{filtered}}</pre>
+                <pre>{{rated}}</pre>
+            </section>
+            <!-- fin Contenido de las pestaÃ±as -->
+        </section>
+        <!-- fin PestaÃ±as laterales la pagina -->
+    </section>
+    <!-- fin Envoltorio con el contenido de la pagina -->
+    <div id="push"></div>
+</section>
+<!-- fin Envoltorio con todo el contenido de la pÃ¡gina -->
+<!-- Pie de pagina -->

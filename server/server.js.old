@@ -1,0 +1,71 @@
+/*
+ * server
+ * https://github.com/diesire/mood
+ *
+ * Copyright (c) 2013 Pablo Escalada Gómez
+ * Licensed under the MIT license.
+ */
+
+'use strict';
+
+var express = require('express'),
+    app = express(),
+    mood = require('../lib/mood.js');
+
+app.configure(function () {
+    app.use(express.favicon());
+    app.use(express.bodyParser());
+    //app.use(express.logger('dev')); //tiny, short, default
+    app.use(app.router);
+    app.use(express.static(__dirname + '/app'));
+    app.use(express.errorHandler({
+        dumpExceptions: true,
+        showStack: true,
+        showMessage: true
+    }));
+});
+
+// Read 
+app.get('/', function (req, res) {
+    res.contentType('application/json');
+    res.send({
+        aaa: 'aaa'
+    });
+});
+
+app.post('/rate', function (req, res) {
+    var strategy = {
+        callback: mood.ratingStrategy.simple,
+        args: {
+            min: 3,
+            max: 6
+        }
+    };
+
+
+    mood.rate(req.body.tweet, strategy, function (err, data) {
+        if (err) {
+            res.send(err);
+        }
+        res.contentType('application/json');
+        res.send(data);
+    });
+});
+
+app.post('/tools/tokenizer', function(req, res) {
+    res.contentType('application/json');
+    res.send({
+        tokens: mood.tools.tokenizer(req.body.tweet)
+    });
+});
+
+server.post('/tools/stemmer', function(req, res) {
+    res.contentType('application/json');
+    res.send({
+        tokens: mood.tools.stemmer(req.body.tweet)
+    });
+});
+
+app.listen(3000, function () {
+    console.log("Listening on 3000");
+});
