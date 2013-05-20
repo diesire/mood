@@ -7,13 +7,13 @@ var express = require('express'),
 app.configure(function () {
     app.use(express.favicon());
     app.use(express.bodyParser());
-    //app.use(express.logger('dev')); //tiny, short, default
+    app.use(express.logger('dev')); //tiny, short, default
     app.use(app.router);
     app.use(express.static(__dirname + '/app'));
     app.use(express.errorHandler({
         dumpExceptions: true,
-        showStack: false,
-        showMessage: false
+        showStack: true,
+        showMessage: true
     }));
 });
 
@@ -75,7 +75,7 @@ app.get('/search', function (req, res) {
     var client = restify.createJsonClient({
         url: 'http://156.35.98.15'
     });
-    console.log('query: %s', req.query);
+    console.log('query: %o', req.query);
     var palabra = req.query.palabra;
     var positivo = req.query.positivo;
     var negativo = req.query.negativo;
@@ -89,7 +89,28 @@ app.get('/search', function (req, res) {
             return;
         }
         res.contentType('application/json');
-        //console.log(cdata);
+        console.log(cdata);
+        res.send(cdata);
+    });
+});
+
+app.get('/history', function (req, res) {
+    var restify = require('restify');
+    var client = restify.createJsonClient({
+        url: 'http://156.35.98.15'
+    });
+    console.log('query: %o', req.query);
+    var palabra = req.query.palabra;
+
+    //http://156.35.98.15/consulta_historico.php?palabra=universo
+    var path = '/consulta_historico.php?palabra=' + palabra;
+    client.get(path, function (cerr, creq, cres, cdata) {
+        if (cerr) {
+            res.send(500, cerr);
+            return;
+        }
+        res.contentType('application/json');
+        console.log(cdata);
         res.send(cdata);
     });
 });

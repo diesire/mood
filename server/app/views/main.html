@@ -13,7 +13,7 @@
         <section class="tabbable tabs-left">
             <ul class="nav nav-tabs">
                 <li>
-                    <a href="index.html">Presentación</a>
+                    <a href="#">Presentación</a>
                 </li>
                 <li class="active">
                     <a href="#">Analizador</a>
@@ -21,19 +21,27 @@
             </ul>
             <!-- Contenido de las pestaÃ±as -->
             <section class="tab-content">
+                <!-- Gráfica -->
                 <div chart></div>
                 <pre>{{dataArray}}</pre>
                 <form novalidate class="simple-form">Palabra:
                     <input type="text" ng-model="topic" placeholder="universo" />
                     <br />Fecha:
-                    <input type="text" ng-model="date" placeholder="2008-02-02"/>
+                    <input type="text" ng-model="date" placeholder="2008-02-02" />
                     <br />Mímimo:
-                    <input type="number" ng-model="min" placeholder="3"/>
+                    <input type="number" ng-model="min" placeholder="3" />
                     <br />Máximo:
-                    <input type="number" ng-model="max" placeholder="6"/>
+                    <input type="number" ng-model="max" placeholder="6" />
                     <br />
                     <button ng-click="fetch()">Buscar</button>
                 </form>
+                <div>
+                    <ul class="unstyled">
+                        <li ng-repeat="data in historyData">
+                            <a href="" ng-click="searchFromHistory(data)">{{data}}</a>
+                        </li>
+                    </ul>
+                </div>
                 <pre>{{filtered}}</pre>
                 <pre>{{rated}}</pre>
             </section>
