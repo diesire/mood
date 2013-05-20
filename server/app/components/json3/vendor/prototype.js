@@ -1393,7 +1393,7 @@ Ajax.Responders = {
             if (Object.isFunction(responder[callback])) {
                 try {
                     responder[callback].apply(responder, [request, transport,
-                            json
+                        json
                     ]);
                 } catch (e) {}
             }
@@ -3923,7 +3923,7 @@ Object.extend(Selector, {
                 return [];
             }
             return (targetNode && Element.descendantOf(targetNode, root)) ? [
-                    targetNode
+                targetNode
             ] : [];
         },
 

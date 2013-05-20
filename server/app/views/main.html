@@ -1,56 +1,53 @@
-<!-- Envoltorio con todo el contenido de la pÃ¡gina -->
-<section id="wrap">
-    <!-- Envoltorio con el contenido de la pagina -->
-    <section class="container">
-        <!-- Cabecera de la pagina -->
-        <header class="page-header">
-            <h1>Máster en Ingeniería Web
-                <br>
-                <small>Universidad de Oviedo -Analizador de sentimiento</small>
-            </h1>
-        </header>
-        <!-- PestaÃ±as laterales la pagina -->
-        <section class="tabbable tabs-left">
-            <ul class="nav nav-tabs">
-                <li>
-                    <a href="#">Presentación</a>
-                </li>
-                <li class="active">
-                    <a href="#">Analizador</a>
+    <div class="page-header">
+        <h1> Máster en Ingeniería Web
+        <br>
+        <small> Universidad de Oviedo - Analizador de sentimiento
+        </small>
+        </h1>
+    </div> 
+    <div class="row-fluid">
+        <div class="span8 offset1">
+            <div chart></div >
+        </div>
+        <div class="span8 offset2">
+            <form ng-submit="fetch()">
+                <fieldset>
+                <legend>Filtro</legend>
+                Palabra: 
+                <input type="text" ng-model="topic" placeholder="universo" required/>
+                <br/>
+                Fecha:
+                <input type="text" ng-model="date" placeholder="2009-08-19" required/>
+                <br/>
+                Mímimo:
+                <input type="number" ng-model="min" placeholder="3" required/>
+                <br/>
+                Máximo:
+                <input type="number" ng-model="max" placeholder="6" required/>
+                <br/>
+                <input type="submit" id="buscar" value="Filtrar" />
+                </fieldset>
+            </form>
+        </div>
+        <div class="well span8 offset2">
+            <p>Historial</p>
+            <ul class="unstyled">
+                <li ng-repeat="data in historyData">
+                    <a href="" ng-click="searchFromHistory(data.value)">
+                        {{data.name}}
+                    </a>
+              
                 </li>
             </ul>
-            <!-- Contenido de las pestaÃ±as -->
-            <section class="tab-content">
-                <!-- Gráfica -->
-                <div chart></div>
-                <pre>{{dataArray}}</pre>
-                <form novalidate class="simple-form">Palabra:
-                    <input type="text" ng-model="topic" placeholder="universo" />
-                    <br />Fecha:
-                    <input type="text" ng-model="date" placeholder="2008-02-02" />
-                    <br />Mímimo:
-                    <input type="number" ng-model="min" placeholder="3" />
-                    <br />Máximo:
-                    <input type="number" ng-model="max" placeholder="6" />
-                    <br />
-                    <button ng-click="fetch()">Buscar</button>
-                </form>
-                <div>
-                    <ul class="unstyled">
-                        <li ng-repeat="data in historyData">
-                            <a href="" ng-click="searchFromHistory(data)">{{data}}</a>
-                        </li>
-                    </ul>
-                </div>
-                <pre>{{filtered}}</pre>
-                <pre>{{rated}}</pre>
-            </section>
-            <!-- fin Contenido de las pestaÃ±as -->
-        </section>
-        <!-- fin PestaÃ±as laterales la pagina -->
-    </section>
-    <!-- fin Envoltorio con el contenido de la pagina -->
-    <div id="push"></div>
-</section>
-<!-- fin Envoltorio con todo el contenido de la pÃ¡gina -->
-<!-- Pie de pagina -->
+        </div>
+        
+        <div class="span8 offset2">
+            <p class="lead">Información de debug</p>
+            <p>Tweets</p>
+            <pre> {{filtered}} </pre>
+            <p>Valoraciones</p>
+            <pre> {{rated|json}} </pre>
+            <p>Datos de diagrama</p>
+            <pre> {{dataArray}} </pre>
+        </div>
+    </div>

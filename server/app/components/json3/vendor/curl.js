@@ -10,7 +10,8 @@
  * 		http://www.opensource.org/licenses/mit-license.php
  *
  * @version 0.6
- */ (function(global) {
+ */
+(function(global) {
 
     /*
      * Basic operation:

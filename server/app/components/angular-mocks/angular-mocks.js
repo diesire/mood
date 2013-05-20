@@ -875,7 +875,7 @@ function createHttpBackendMock($delegate, $browser) {
 
         return function() {
             return angular.isNumber(status) ? [status, data, headers] : [200,
-                    status, data
+                status, data
             ];
         };
     }
@@ -1612,7 +1612,7 @@ angular.module('ngMockE2E', ['ng']).config(function($provide) {
  */
 angular.mock.e2e = {};
 angular.mock.e2e.$httpBackendDecorator = ['$delegate', '$browser',
-        createHttpBackendMock
+    createHttpBackendMock
 ];
 
 

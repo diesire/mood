@@ -369,8 +369,8 @@
                 whitespace, indentation, stack) {
                 var value = object[property],
                     className, year, month, date, time, hours, minutes, seconds,
-                        milliseconds, results, element, index, length, prefix,
-                        any, result;
+                    milliseconds, results, element, index, length, prefix,
+                    any, result;
                 if (typeof value == "object" && value) {
                     className = getClass.call(value);
                     if (className == "[object Date]" && !isProperty.call(value,

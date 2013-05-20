@@ -41,9 +41,9 @@ var requirejs, require, define;
         checkLoadedDepth = 0,
         useInteractive = false,
         req, cfg = {}, currentlyAddingScript, s, head, baseElement, scripts,
-            script,
+        script,
         src, subPath, mainScript, dataMain, i, scrollIntervalId, setReadyState,
-            ctx,
+        ctx,
         jQueryCheck, checkLoadedTimeoutId;
 
     function isFunction(it) {
@@ -1336,7 +1336,7 @@ var requirejs, require, define;
                     //local var ref to defQueue, so cannot just reassign the one
                     //on context.
                     apsp.apply(context.defQueue, [context.defQueue.length - 1,
-                            0
+                        0
                     ].concat(globalDefQueue));
                     globalDefQueue = [];
                 }
@@ -1705,7 +1705,7 @@ var requirejs, require, define;
         //occurs. If no context, use the global queue, and get it processed
         //in the onscript load callback.
         (context ? context.defQueue : globalDefQueue).push([name, deps,
-                callback
+            callback
         ]);
 
         return undefined;

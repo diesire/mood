@@ -402,7 +402,7 @@
 
         // Additional arguments.
         this.serializes("[\n  1,\n  2,\n  3,\n  [\n    4,\n    5\n  ]\n]", [1,
-                2, 3, [4, 5]
+            2, 3, [4, 5]
         ], "Nested arrays; optional `whitespace` argument", null, "  ");
         this.serializes("[]", [],
             "Empty array; optional string `whitespace` argument", null, "  ");

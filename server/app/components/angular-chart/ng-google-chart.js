@@ -4,7 +4,8 @@
  * @author Nicolas Bouillon <nicolas@bouil.org>
  * @license MIT
  * @year 2013
- */ (function() {
+ */
+(function() {
     'use strict';
 
     angular.module('googlechart.directives', []).directive('googleChart', function(

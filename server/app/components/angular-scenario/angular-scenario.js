@@ -12,7 +12,8 @@
  * Released under the MIT, BSD, and GPL Licenses.
  *
  * Date: Wed Mar 21 12:46:34 2012 -0700
- */ (function(window, undefined) {
+ */
+(function(window, undefined) {
     'use strict';
 
     // Use the correct document accordingly with window argument (sandbox)
@@ -1301,7 +1302,7 @@
                                         } else {
                                             newDefer[action + "With"](this ===
                                                 deferred ? newDefer : this, [
-                                                    returned
+                                                returned
                                             ]);
                                         }
                                     });
@@ -1585,7 +1586,7 @@
         jQuery(function() {
             var container, outer, inner, table, td, offsetSupport,
                 marginDiv, conMarginTop, style, html,
-                    positionTopLeftWidthHeight,
+                positionTopLeftWidthHeight,
                 paddingMarginBorderVisibility, paddingMarginBorder,
                 body = document.getElementsByTagName("body")[0];
 
@@ -3226,7 +3227,7 @@
             var type = event.type || event,
                 namespaces = [],
                 cache, exclusive, i, cur, old, ontype, special, handle,
-                    eventPath, bubbleType;
+                eventPath, bubbleType;
 
             // focus/blur morphs to focusin/out; ensure we're not firing them right now
             if (rfocusMorph.test(type + jQuery.event.triggered)) {
@@ -3391,7 +3392,7 @@
                 special = jQuery.event.special[event.type] || {},
                 handlerQueue = [],
                 i, j, cur, jqcur, ret, selMatch, matched, matches, handleObj,
-                    sel, related;
+                sel, related;
 
             // Use the fix-ed jQuery.Event rather than the (read-only) native event
             args[0] = event;
@@ -4110,7 +4111,8 @@
      *  Copyright 2011, The Dojo Foundation
      *  Released under the MIT, BSD, and GPL Licenses.
      *  More information: http://sizzlejs.com/
-     */ (function() {
+     */
+    (function() {
 
         var chunker =
             /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
@@ -4897,7 +4899,7 @@
 
                     } else if (name === "contains") {
                         return (elem.textContent || elem.innerText || getText([
-                                elem
+                            elem
                         ]) || "").indexOf(match[3]) >= 0;
 
                     } else if (name === "not") {
@@ -7260,7 +7262,7 @@
 
                     // assumes a single number if not a string
                     parts = typeof value === "string" ? value.split(" ") : [
-                            value
+                        value
                     ],
                     expanded = {};
 
@@ -7867,11 +7869,11 @@
                 // Success/Error
                 if (isSuccess) {
                     deferred.resolveWith(callbackContext, [success, statusText,
-                            jqXHR
+                        jqXHR
                     ]);
                 } else {
                     deferred.rejectWith(callbackContext, [jqXHR, statusText,
-                            error
+                        error
                     ]);
                 }
 
@@ -8922,7 +8924,7 @@
                         // change the overflow attribute when overflowX and
                         // overflowY are set to the same value
                         opt.overflow = [this.style.overflow, this.style.overflowX,
-                                this.style.overflowY
+                            this.style.overflowY
                         ];
 
                         // Set display property to inline-block for height/width
@@ -9846,7 +9848,8 @@
  * @license AngularJS v1.0.6
  * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
- */ (function(window, document) {
+ */
+(function(window, document) {
     var _jQuery = window.jQuery.noConflict(true);
 
     ////////////////////////////////////
@@ -11188,7 +11191,7 @@
                     function invokeLater(provider, method, insertMethod) {
                         return function() {
                             invokeQueue[insertMethod || 'push']([provider,
-                                    method, arguments
+                                method, arguments
                             ]);
                             return moduleInstance;
                         }
@@ -13977,7 +13980,7 @@
                     function compositeLinkFn(scope, nodeList, $rootElement,
                         boundTranscludeFn) {
                         var nodeLinkFn, childLinkFn, node, childScope,
-                                childTranscludeFn, i, ii, n;
+                            childTranscludeFn, i, ii, n;
 
                         // copy nodeList so that linking doesn't break due to live list updates.
                         var stableNodeList = [];
@@ -14091,11 +14094,11 @@
                             break;
                         case 3:
                             /* Text Node */
-                                addTextInterpolateDirective(directives, node.nodeValue);
+                            addTextInterpolateDirective(directives, node.nodeValue);
                             break;
                         case 8:
                             /* Comment */
-                                try {
+                            try {
                                 match = COMMENT_DIRECTIVE_REGEXP.exec(node.nodeValue);
                                 if (match) {
                                     nName = directiveNormalize(match[1]);
@@ -14843,26 +14846,17 @@
      */
 
     function nodesetLinkingFn(
-    /* angular.Scope */
-    scope,
-    /* NodeList */
-    nodeList,
-    /* Element */
-    rootElement,
-    /* function(Function) */
-    boundTranscludeFn) {}
+    /* angular.Scope */scope,
+    /* NodeList */nodeList,
+    /* Element */rootElement,
+    /* function(Function) */boundTranscludeFn) {}
 
     function directiveLinkingFn(
-    /* nodesetLinkingFn */
-    nodesetLinkingFn,
-    /* angular.Scope */
-    scope,
-    /* Node */
-    node,
-    /* Element */
-    rootElement,
-    /* function(Function) */
-    boundTranscludeFn) {}
+    /* nodesetLinkingFn */nodesetLinkingFn,
+    /* angular.Scope */scope,
+    /* Node */node,
+    /* Element */rootElement,
+    /* function(Function) */boundTranscludeFn) {}
 
     /**
      * @ngdoc object
@@ -20824,7 +20818,7 @@
             if (!isArray(array)) return array;
             if (!sortPredicate) return array;
             sortPredicate = isArray(sortPredicate) ? sortPredicate : [
-                    sortPredicate
+                sortPredicate
             ];
             sortPredicate = map(sortPredicate, function(predicate) {
                 var descending = false,
@@ -25083,7 +25077,7 @@
                                     collection = valuesFn(scope) || [],
                                     locals = {},
                                     key, value, optionElement, index,
-                                        groupIndex, length, groupLength;
+                                    groupIndex, length, groupLength;
 
                                 if (multiple) {
                                     value = [];
@@ -25693,7 +25687,8 @@
      * the checkbox and then notifies listeners.
      *
      * To work around this we instead use our own handler that fires a real event.
-     */ (function(fn) {
+     */
+    (function(fn) {
         var parentTrigger = fn.trigger;
         fn.trigger = function(type) {
             if (/(click|change|keydown|blur|input)/.test(type)) {

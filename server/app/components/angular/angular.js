@@ -2,7 +2,8 @@
  * @license AngularJS v1.0.6
  * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
- */ (function(window, document, undefined) {
+ */
+(function(window, document, undefined) {
     'use strict';
 
     ////////////////////////////////////
@@ -1344,7 +1345,7 @@
                     function invokeLater(provider, method, insertMethod) {
                         return function() {
                             invokeQueue[insertMethod || 'push']([provider,
-                                    method, arguments
+                                method, arguments
                             ]);
                             return moduleInstance;
                         }
@@ -4133,7 +4134,7 @@
                     function compositeLinkFn(scope, nodeList, $rootElement,
                         boundTranscludeFn) {
                         var nodeLinkFn, childLinkFn, node, childScope,
-                                childTranscludeFn, i, ii, n;
+                            childTranscludeFn, i, ii, n;
 
                         // copy nodeList so that linking doesn't break due to live list updates.
                         var stableNodeList = [];
@@ -4247,11 +4248,11 @@
                             break;
                         case 3:
                             /* Text Node */
-                                addTextInterpolateDirective(directives, node.nodeValue);
+                            addTextInterpolateDirective(directives, node.nodeValue);
                             break;
                         case 8:
                             /* Comment */
-                                try {
+                            try {
                                 match = COMMENT_DIRECTIVE_REGEXP.exec(node.nodeValue);
                                 if (match) {
                                     nName = directiveNormalize(match[1]);
@@ -4999,26 +5000,17 @@
      */
 
     function nodesetLinkingFn(
-    /* angular.Scope */
-    scope,
-    /* NodeList */
-    nodeList,
-    /* Element */
-    rootElement,
-    /* function(Function) */
-    boundTranscludeFn) {}
+    /* angular.Scope */scope,
+    /* NodeList */nodeList,
+    /* Element */rootElement,
+    /* function(Function) */boundTranscludeFn) {}
 
     function directiveLinkingFn(
-    /* nodesetLinkingFn */
-    nodesetLinkingFn,
-    /* angular.Scope */
-    scope,
-    /* Node */
-    node,
-    /* Element */
-    rootElement,
-    /* function(Function) */
-    boundTranscludeFn) {}
+    /* nodesetLinkingFn */nodesetLinkingFn,
+    /* angular.Scope */scope,
+    /* Node */node,
+    /* Element */rootElement,
+    /* function(Function) */boundTranscludeFn) {}
 
     /**
      * @ngdoc object
@@ -10980,7 +10972,7 @@
             if (!isArray(array)) return array;
             if (!sortPredicate) return array;
             sortPredicate = isArray(sortPredicate) ? sortPredicate : [
-                    sortPredicate
+                sortPredicate
             ];
             sortPredicate = map(sortPredicate, function(predicate) {
                 var descending = false,
@@ -15239,7 +15231,7 @@
                                     collection = valuesFn(scope) || [],
                                     locals = {},
                                     key, value, optionElement, index,
-                                        groupIndex, length, groupLength;
+                                    groupIndex, length, groupLength;
 
                                 if (multiple) {
                                     value = [];
