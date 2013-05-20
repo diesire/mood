@@ -4,7 +4,7 @@ var express = require('express'),
     app = express(),
     mood = require('../lib/mood.js');
 
-app.configure(function() {
+app.configure(function () {
     app.use(express.favicon());
     app.use(express.bodyParser());
     //app.use(express.logger('dev')); //tiny, short, default
@@ -18,14 +18,14 @@ app.configure(function() {
 });
 
 // Read 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.contentType('application/json');
     res.send({
         aaa: 'aaa'
     });
 });
 
-app.post('/rate', function(req, res) {
+app.post('/rate', function (req, res) {
     var strategy = {
         callback: mood.ratingStrategy.simple,
         args: {
@@ -36,8 +36,8 @@ app.post('/rate', function(req, res) {
     var result = [];
     var remain = req.body.length;
 
-    req.body.forEach(function(element) {
-        mood.rate(element.tweet, strategy, function(err, data) {
+    req.body.forEach(function (element) {
+        mood.rate(element.tweet, strategy, function (err, data) {
             if (err) {
                 res.send(500, cerr);
                 return;
@@ -56,26 +56,26 @@ app.post('/rate', function(req, res) {
     });
 });
 
-app.post('/tools/tokenizer', function(req, res) {
+app.post('/tools/tokenizer', function (req, res) {
     res.contentType('application/json');
     res.send({
         tokens: mood.tools.tokenizer(req.body.tweet)
     });
 });
 
-app.post('/tools/stemmer', function(req, res) {
+app.post('/tools/stemmer', function (req, res) {
     res.contentType('application/json');
     res.send({
         tokens: mood.tools.stemmer(req.body.tweet)
     });
 });
 
-app.get('/search', function(req, res) {
+app.get('/search', function (req, res) {
     var restify = require('restify');
     var client = restify.createJsonClient({
         url: 'http://156.35.98.15'
     });
-    //console.log('query: %o', req.query);
+    
     var palabra = req.query.palabra;
     var positivo = req.query.positivo;
     var negativo = req.query.negativo;
@@ -86,38 +86,38 @@ app.get('/search', function(req, res) {
         positivo + '&negativo=' + negativo + '&fecha=' + fecha;
 
 
-    client.get(path, function(cerr, creq, cres, cdata) {
+    client.get(path, function (cerr, creq, cres, cdata) {
         if (cerr) {
             res.send(500, cerr);
             return;
         }
         res.contentType('application/json');
-        //console.log(cdata);
+
         res.send(cdata);
     });
 });
 
-app.get('/history', function(req, res) {
+app.get('/history', function (req, res) {
     var restify = require('restify');
     var client = restify.createJsonClient({
         url: 'http://156.35.98.15'
     });
-    console.log('history: %o', req.query);
+    
     var palabra = req.query.palabra;
 
     //http://156.35.98.15/consulta_historico.php?palabra=universo
     var path = '/consulta_historico.php?palabra=' + palabra;
-    client.get(path, function(cerr, creq, cres, cdata) {
+    client.get(path, function (cerr, creq, cres, cdata) {
         if (cerr) {
             res.send(500, cerr);
             return;
         }
         res.contentType('application/json');
-        console.log(cdata);
+        
         res.send(cdata);
     });
 });
 
-app.listen(3001, function() {
+app.listen(3001, function () {
     console.log("Listening on 3001");
 });

@@ -76,7 +76,7 @@ app.controller('MainCtrl', function($scope, $http) {
 
     var showHistory = function(source) {
         var aux = source.map(function(element) {
-            console.log('>>>> %o', element);
+            
             var elementStr = '' + element.fecha + ' [' + element.negativo +
                 ', ' + element.positivo + ']';
             return {
