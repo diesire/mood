@@ -1,12 +1,7 @@
-# mood [github](https://github.com/diesire/mood) 
+# mood
 
-Twitter feelings analizer```
-
-## Documentation
-_(Coming soon)_
-
-## Examples
-_(Coming soon)_
+Twitter feelings analizer made with nodejs and AngularJs
+[github](https://github.com/diesire/mood) 
 
 ## License
 Copyright (c) 2013 Pablo Escalada Gómez  
